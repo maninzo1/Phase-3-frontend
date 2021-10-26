@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import {React, useState , useEffect } from 'react';
 import './App.css';
+import DisplayMedRecords from './components/DisplayMedRecords';
+import Header from './components/Header';
+
 
 function App() {
+  
+  // states
+  const [records, setRecords] = useState([])
+  const [doctors, setDoctors] = useState([])
+  const [patients, setPatients] = useState([])
+
+
+  useEffect(()=>{
+    fetch("http://localhost:9292/medical_records")
+    .then(resp => resp.json())
+    .then(records => setRecords(records))
+
+    fetch("http://localhost:9292/doctors")
+    .then(resp => resp.json())
+    .then(docs => setDoctors(docs))
+    
+
+    fetch("http://localhost:9292/patients")
+    .then(resp=> resp.json())
+    .then(patients => setPatients(patients))
+    
+    },[])
+  
+  console.log(doctors)
+  console.log(patients)
+  console.log(records)
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      {patients.map((patient) => <DisplayMedRecords patient={patient} />)}
     </div>
   );
 }
