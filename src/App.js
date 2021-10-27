@@ -12,17 +12,17 @@ function App() {
   const [records, setRecords] = useState([])
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
+  
 
   // functions
 
   function currentUser(input){
     setUser(input);
-    setLoggedIn(!loggedIn);
     
   }
-
+  
   useEffect(()=>{
     fetch("http://localhost:9292/medical_records")
     .then(resp => resp.json())
@@ -46,7 +46,7 @@ function App() {
   if (!loggedIn){
     return ( <div className='LogIn'>
       <Header />
-      <UserLogIn currentUser = {currentUser} doctors = {doctors}/>
+      <UserLogIn currentUser = {currentUser} doctors = {doctors} setLoggedIn = {setLoggedIn}/>
       </div>
     )
   }

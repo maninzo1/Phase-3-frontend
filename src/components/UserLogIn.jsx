@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-function UserLogIn({currentUser , doctors}){
+function UserLogIn({currentUser , doctors , setLoggedIn}){
     //have a user log in so they can access information
     
     const [input, setInput] = useState({
@@ -8,10 +8,10 @@ function UserLogIn({currentUser , doctors}){
         "password": ""
     })
 
-     const docName = doctors.filter(doc => doc.username === input.username)
-     const docPassword = doctors.filter(doc => doc.password === input.password)
+     const doc = doctors.filter(doc => doc.username === input.username && doc.password === input.password)
      
-    
+     
+    console.log(doc)
     function userInput(e){
         setInput({...input,
         [e.target.name]:e.target.value})
@@ -20,8 +20,10 @@ function UserLogIn({currentUser , doctors}){
 
     function userSubmit(e){
         e.preventDefault()
-        if (docName === input.username && docPassword === input.password) 
-    currentUser(input);
+        if (doc) {
+    currentUser(doc);
+    setLoggedIn(true);
+        }
     else{
         return(
             <h1>"No Such Doc Exists"</h1>
