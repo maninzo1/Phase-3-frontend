@@ -57,6 +57,20 @@ function App() {
         })
   }
 
+  function editRecord(updateRecord){
+    fetch(`http://localhost:9292/medical_records/:id`,{
+      method : 'PATCH',
+      headers :{
+          "Content-Type":"application/json"
+      },
+      body: JSON.stringify(updateRecord)
+      })
+      .then(resp => resp.json())
+      .then(data => setRecords(records, updateRecord)
+      
+      )}
+
+
 
 
   // init fetches
@@ -96,7 +110,7 @@ function App() {
       
       <h2>Patient Records:</h2>
     
-      {patients.map((patient) => <DisplayMedRecords patient={patient} records={records} user={user} createRecord = {createRecord}/>)}
+      {patients.map((patient) => <DisplayMedRecords patient={patient} records={records} user={user} createRecord = {createRecord} editRecord={editRecord}/>)}
       <AddUser uploadPatient={uploadPatient} />
     </div>
   );
