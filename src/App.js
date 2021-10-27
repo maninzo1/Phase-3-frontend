@@ -12,17 +12,54 @@ function App() {
   const [records, setRecords] = useState([])
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState([{
+    "name":"",
+    "id":""
+  }])
   const [loggedIn, setLoggedIn] = useState(false)
   
+
+  
+
 
   // functions
 
   function currentUser(input){
     setUser(input);
-    
+    setLoggedIn(!loggedIn)
   }
   
+  function uploadPatient(newPatient){
+    fetch("http://localhost:9292/patients",{
+      method : 'POST',
+      headers :{
+          "Content-Type":"application/json"
+      },
+      body: JSON.stringify(newPatient)
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        setPatients([...patients, newPatient])
+      })
+  }
+  
+  function createRecord(newRecord){
+      fetch("http://localhost:9292/medical_records",{
+        method : 'POST',
+        headers :{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(newRecord)
+        })
+        .then(resp => resp.json())
+        .then(data => {
+          setRecords([...records, newRecord])
+        })
+  }
+
+
+
+  // init fetches
   useEffect(()=>{
     fetch("http://localhost:9292/medical_records")
     .then(resp => resp.json())
@@ -39,14 +76,14 @@ function App() {
     
     },[])
   
-  console.log(doctors)
-  console.log(patients)
-  console.log(records)
+  
+  
+  
 
   if (!loggedIn){
     return ( <div className='LogIn'>
       <Header />
-      <UserLogIn currentUser = {currentUser} doctors = {doctors} setLoggedIn = {setLoggedIn}/>
+      <UserLogIn currentUser = {currentUser} doctors = {doctors}/>
       </div>
     )
   }
@@ -55,10 +92,12 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <h2>Welcome, {user[0].name}</h2>
       
       <h2>Patient Records:</h2>
-      {patients.map((patient) => <DisplayMedRecords patient={patient} records={records}/>)}
-      <AddUser />
+    
+      {patients.map((patient) => <DisplayMedRecords patient={patient} records={records} user={user} createRecord = {createRecord}/>)}
+      <AddUser uploadPatient={uploadPatient} />
     </div>
   );
 }

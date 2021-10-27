@@ -1,9 +1,13 @@
 import {useState} from 'react'
 import DetailedMedRec from './DetailedMedRec'
+import CreateRecords from './CreateRecords'
 
-function DisplayMedRecords({patient, records}){
+
+function DisplayMedRecords({patient, records, user, createRecord }){
 
     const [showDetails, setShowDetails] = useState(false)
+    
+    
     function handleInfoVisibility(){
      setShowDetails(!showDetails)
       } 
@@ -15,7 +19,8 @@ function DisplayMedRecords({patient, records}){
     return (
         <div>
         <button onClick={handleInfoVisibility}>{patient.name}</button>
-        {showDetails !== false? patientRecords.map((record => <DetailedMedRec record={record} />)) : null }
+        {showDetails !== false? patientRecords.map((record =>  <DetailedMedRec record={record} />  )) : null }
+        {showDetails? <CreateRecords user={user} patient={patient} createRecord={createRecord}/> : null}
         </div>
     )
 }
