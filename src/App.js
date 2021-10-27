@@ -12,7 +12,16 @@ function App() {
   const [records, setRecords] = useState([])
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
+  const [user, setUser] = useState({})
+  const [loggedIn, setLoggedIn] = useState(false)
 
+  // functions
+
+  function currentUser(input){
+    setUser(input);
+    setLoggedIn(!loggedIn);
+    
+  }
 
   useEffect(()=>{
     fetch("http://localhost:9292/medical_records")
@@ -33,11 +42,20 @@ function App() {
   console.log(doctors)
   console.log(patients)
   console.log(records)
-  
+
+  if (!loggedIn){
+    return ( <div className='LogIn'>
+      <Header />
+      <UserLogIn currentUser = {currentUser} doctors = {doctors}/>
+      </div>
+    )
+  }
+
+  else
   return (
     <div className="App">
       <Header />
-      <UserLogIn />
+      
       <h2>Patient Records:</h2>
       {patients.map((patient) => <DisplayMedRecords patient={patient} records={records}/>)}
       <AddUser />
