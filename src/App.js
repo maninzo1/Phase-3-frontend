@@ -2,6 +2,8 @@ import {React, useState , useEffect } from 'react';
 import './App.css';
 import DisplayMedRecords from './components/DisplayMedRecords';
 import Header from './components/Header';
+import UserLogIn from './components/UserLogIn';
+import AddUser from './components/AddUser';
 
 
 function App() {
@@ -35,7 +37,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {patients.map((patient) => <DisplayMedRecords patient={patient} />)}
+      <UserLogIn />
+      <h2>Patient Records:</h2>
+      {patients.map((patient) => <DisplayMedRecords patient={patient} records={records}/>)}
+      <AddUser />
     </div>
   );
 }
