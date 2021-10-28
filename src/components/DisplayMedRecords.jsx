@@ -4,10 +4,10 @@ import CreateRecords from './CreateRecords'
 
 
 
-function DisplayMedRecords({patient, records, user, createRecord, editRecord }){
+function DisplayMedRecords({patient, records, user, createRecord, editRecord, filterPatients, deleteRecord }){
 
     const [showDetails, setShowDetails] = useState(false)
-    
+    console.log(patient)
     
     function handleInfoVisibility(){
      setShowDetails(!showDetails)
@@ -20,7 +20,7 @@ function DisplayMedRecords({patient, records, user, createRecord, editRecord }){
     return (
         <div>
         <button onClick={handleInfoVisibility}>{patient.name}</button>
-        {showDetails !== false? patientRecords.map((record =>  <DetailedMedRec record={record} editRecord={editRecord}/>  )) : null }
+        {showDetails !== false? patientRecords.map((record =>  <DetailedMedRec record={record} editRecord={editRecord} filterPatients={filterPatients} deleteRecord={deleteRecord}/>  )) : null }
         {showDetails? <CreateRecords user={user} patient={patient} createRecord={createRecord}/> : null}
         
         </div>

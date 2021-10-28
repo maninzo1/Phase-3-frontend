@@ -9,20 +9,45 @@ import AddUser from './components/AddUser';
 function App() {
   
   // states
+  const [on, setOn] = useState(false)
   const [records, setRecords] = useState([])
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
+  const [newPatients, setNewPatients] = useState([])
   const [user, setUser] = useState([{
     "name":"",
     "id":""
   }])
   const [loggedIn, setLoggedIn] = useState(false)
-  
+  //constants
+  const userRecords = records.filter(r=> r.doctor_id === user[0].id)
+  const userPatients = userRecords.map(record => patients.filter(p=> p.id === record.patient_id))
+  const patientFilter = patients.filter(p => !records.some(r => r.patient_id === p.id))
+      
 
-  
+console.log(userRecords)
+console.log(userPatients)
+console.log(newPatients)
 
 
   // functions
+
+  function deleteRecord(id){
+    fetch(`http://localhost:9292/medical_records/${id}`, {
+      method: "DELETE"
+  })
+  .then(resp => resp.json())
+  .then(data=> {
+      filterPatients()
+      setRecords(records.filter(r => r.id !== id))
+    })
+  }
+
+
+  function filterPatients(){
+    setNewPatients(patientFilter)
+    setOn(!on)
+  }
 
   function currentUser(input){
     setUser(input);
@@ -54,6 +79,7 @@ function App() {
         .then(resp => resp.json())
         .then(data => {
           setRecords([...records, newRecord])
+          filterPatients()
         })
   }
 
@@ -88,7 +114,10 @@ function App() {
 
     fetch("http://localhost:9292/patients")
     .then(resp=> resp.json())
-    .then(patients => setPatients(patients))
+    .then(patients => {
+      setPatients(patients)
+      
+    })
     
     },[])
   
@@ -109,10 +138,15 @@ function App() {
     <div className="App">
       <Header />
       <h2>Welcome, {user[0].name}</h2>
-      
+      <h4>New Patients</h4>
+      <br/>
+      <button onClick={filterPatients}>Show Patients</button>
+      {on? newPatients.map(newPatient => <DisplayMedRecords key={newPatient.id} patient={newPatient} records={records} user={user} createRecord = {createRecord} editRecord={editRecord} />) : null}
+
+
       <h2>Patient Records:</h2>
     
-      {patients.map((patient) => <DisplayMedRecords patient={patient} records={records} user={user} createRecord = {createRecord} editRecord={editRecord}/>)}
+      {userPatients.map((patient) => <DisplayMedRecords key={patient.id} patient={patient[0]} records={userRecords} user={user} createRecord = {createRecord} editRecord={editRecord} filterPatients={filterPatients} deleteRecord={deleteRecord}/>)}
       <AddUser uploadPatient={uploadPatient} />
     </div>
   );
