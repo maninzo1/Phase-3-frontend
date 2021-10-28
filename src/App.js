@@ -57,8 +57,8 @@ function App() {
         })
   }
 
-  function editRecord(updateRecord){
-    fetch(`http://localhost:9292/medical_records/:id`,{
+  function editRecord(updateRecord, record){
+    fetch(`http://localhost:9292/medical_records/${record.id}`,{
       method : 'PATCH',
       headers :{
           "Content-Type":"application/json"
@@ -66,8 +66,10 @@ function App() {
       body: JSON.stringify(updateRecord)
       })
       .then(resp => resp.json())
-      .then(data => setRecords(records, updateRecord)
-      
+      .then(data => {
+      const newRecords = records.filter(r => r.id !== record.id)
+      setRecords([...newRecords, data])
+      }
       )}
 
 

@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-function UpdateRecord({user, patient, editRecord}){
+function UpdateRecord({record, editRecord}){
     
 
 function userInput(e){
@@ -12,13 +12,14 @@ console.log(input)
 const [input , setInput] = useState({
     "medication": "",
     "lab_results": "",
+
     // "doctor_id": user[0].id,
-    // "patient_id" : patient.id
+    
 })
 
 function handleSubmit(e){
     e.preventDefault()
-    editRecord(input)
+    editRecord(input, record)
 }
 
 return (
