@@ -1,13 +1,11 @@
 import {React, useState , useEffect } from 'react';
-// import './App.css';
+import './App.css';
 import ButtonStyled from './components/styles/ButtonStyled';
 import GlobalStyle from './components/styles/GlobalStyle';
 import DisplayMedRecords from './components/DisplayMedRecords';
 import Header from './components/Header';
 import UserLogIn from './components/UserLogIn';
 import AddUser from './components/AddUser';
-
-
 
 
 function App() {
@@ -155,8 +153,9 @@ console.log(newPatients)
       {on? newPatients.map(newPatient => <DisplayMedRecords key={newPatient.id} patient={newPatient} records={records} user={user} createRecord = {createRecord} editRecord={editRecord} />) : null}
 
       <AddUser uploadPatient={uploadPatient} />
-      <img src="https://images.clipartlogo.com/files/istock/previews/1055/105589245-the-stethoscope-and-a-heart-with-pulse-medicine-and-health.jpg" alt="healthcare workers"/>
+      {/* <img src="https://images.clipartlogo.com/files/istock/previews/1055/105589245-the-stethoscope-and-a-heart-with-pulse-medicine-and-health.jpg" alt="healthcare workers"/> */}
       
+  
     </div>
   );
 }

@@ -2,6 +2,7 @@ import {useState} from 'react'
 import styled from 'styled-components'
 import GlobalStyle from '../components/styles/GlobalStyle';
 
+
 function UserLogIn({currentUser , doctors}){
     //have a user log in so they can access information
     
@@ -62,7 +63,7 @@ const UserContainer = styled.div `
     margin: 10px;
     padding: 35px;
     box-shadow: 0 0 20px rgba(0, 0, 0, .3), 0 0 20px rgba(0, 0, 0, 0.1);
-    border: 3px solid #96DED1;
+    border: 3px solid #F0FFFF;
     border-radius: 5px;
     display: flex;
     flex-direction: row;

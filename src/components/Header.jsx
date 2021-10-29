@@ -15,10 +15,10 @@ export default Header
 
 const Wrapper = styled.h3 `
 margin: 0;
-background: #96DED1;
+ background: #F0FFFF;
 
 & h1{
-    color: #848884
+    color: #00000
     
 }
 `

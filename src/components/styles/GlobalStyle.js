@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
- 
+
 const GlobalStyle = createGlobalStyle`
 @import url("https://fonts.googleapis.com/css2?family=Volkhov&display=swap")
 
@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
   }
   img{
-    max-width: 50%
+    max-width: 100%
   }
 `
 

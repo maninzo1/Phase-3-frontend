@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.App{
+  background-image: url("https://img.freepik.com/free-vector/abstract-medical-background-with-icons-symbols-template-with-concept-idea-healthcare-technology-innovation-medicine-health-science-research_120542-571.jpg?size=626&ext=jpg");
+  /* background-attachment: scroll; */
+  /* max-width: 75% */
+
+}
