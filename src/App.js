@@ -38,13 +38,12 @@ console.log(newPatients)
     fetch(`http://localhost:9292/medical_records/${id}`, {
       method: "DELETE"
   })
-  // .then(resp => resp.json())
-  // .then(data=> {
-    //  filterPatients()
-      setRecords(records.filter(r => r.id !== id))
-  
+   .then(resp => resp.json())
+   .then(data=> {
+    setRecords(records.filter(r => r.id !== id))
+    console.log(records)
+  })
   }
-
 
   function filterPatients(){
     setNewPatients(patientFilter)
