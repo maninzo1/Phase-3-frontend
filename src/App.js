@@ -1,9 +1,13 @@
 import {React, useState , useEffect } from 'react';
-import './App.css';
+// import './App.css';
+import ButtonStyled from './components/styles/ButtonStyled';
+import GlobalStyle from './components/styles/GlobalStyle';
 import DisplayMedRecords from './components/DisplayMedRecords';
 import Header from './components/Header';
 import UserLogIn from './components/UserLogIn';
 import AddUser from './components/AddUser';
+
+
 
 
 function App() {
@@ -36,11 +40,11 @@ console.log(newPatients)
     fetch(`http://localhost:9292/medical_records/${id}`, {
       method: "DELETE"
   })
-  .then(resp => resp.json())
-  .then(data=> {
-      filterPatients()
+  // .then(resp => resp.json())
+  // .then(data=> {
+    //  filterPatients()
       setRecords(records.filter(r => r.id !== id))
-    })
+  
   }
 
 
@@ -135,21 +139,27 @@ console.log(newPatients)
 
   else
   return (
+   
     <div className="App">
+    <GlobalStyle/>
       <Header />
       <h2>Welcome, {user[0].name}</h2>
-      <h4>New Patients</h4>
-      <br/>
-      <button onClick={filterPatients}>Show Patients</button>
-      {on? newPatients.map(newPatient => <DisplayMedRecords key={newPatient.id} patient={newPatient} records={records} user={user} createRecord = {createRecord} editRecord={editRecord} />) : null}
 
-
-      <h2>Patient Records:</h2>
+      <h3>Patient Records</h3>
     
       {userPatients.map((patient) => <DisplayMedRecords key={patient.id} patient={patient[0]} records={userRecords} user={user} createRecord = {createRecord} editRecord={editRecord} filterPatients={filterPatients} deleteRecord={deleteRecord}/>)}
+
+      <h3>Add Patient Results</h3>
+      {/* <br/> */}
+      <ButtonStyled onClick={filterPatients}>Show Patients</ButtonStyled>
+      {on? newPatients.map(newPatient => <DisplayMedRecords key={newPatient.id} patient={newPatient} records={records} user={user} createRecord = {createRecord} editRecord={editRecord} />) : null}
+
       <AddUser uploadPatient={uploadPatient} />
+      <img src="https://images.clipartlogo.com/files/istock/previews/1055/105589245-the-stethoscope-and-a-heart-with-pulse-medicine-and-health.jpg" alt="healthcare workers"/>
+      
     </div>
   );
 }
 
 export default App;
+

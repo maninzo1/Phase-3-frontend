@@ -1,8 +1,7 @@
-import {useState} from 'react'
-import DetailedMedRec from './DetailedMedRec'
-import CreateRecords from './CreateRecords'
-
-
+import {useState} from 'react';
+import DetailedMedRec from './DetailedMedRec';
+import CreateRecords from './CreateRecords';
+import ButtonStyled from './styles/ButtonStyled';
 
 function DisplayMedRecords({patient, records, user, createRecord, editRecord, filterPatients, deleteRecord }){
 
@@ -18,8 +17,8 @@ function DisplayMedRecords({patient, records, user, createRecord, editRecord, fi
 //  we want the info displayed to only be things that match the user who is logged in
 //when we click on a patient's name, the app should show us all the detailed medical record
     return (
-        <div>
-        <button onClick={handleInfoVisibility}>{patient.name}</button>
+        <div>  
+        <ButtonStyled onClick={handleInfoVisibility}>{patient.name}</ButtonStyled>
         {showDetails !== false? patientRecords.map((record =>  <DetailedMedRec record={record} editRecord={editRecord} filterPatients={filterPatients} deleteRecord={deleteRecord}/>  )) : null }
         {showDetails? <CreateRecords user={user} patient={patient} createRecord={createRecord}/> : null}
         

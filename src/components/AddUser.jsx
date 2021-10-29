@@ -18,9 +18,9 @@ function userInput(e){
   }
 return(
     <div>
-        <h3>Create Patient Form</h3>
+        <h3>New Patient</h3>
             <form onSubmit={(e)=> submit(e)}>
-                <label htmlFor = "name">Name:</label>
+                <label htmlFor = "name">Name</label>
                 <input id= "name" type= "text" name= "name" onChange={(e)=>userInput(e)}/>
                 <button type="submit">Submit</button>
             </form>

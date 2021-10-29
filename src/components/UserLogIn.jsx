@@ -1,4 +1,6 @@
 import {useState} from 'react'
+import styled from 'styled-components'
+import GlobalStyle from '../components/styles/GlobalStyle';
 
 function UserLogIn({currentUser , doctors}){
     //have a user log in so they can access information
@@ -32,14 +34,20 @@ function UserLogIn({currentUser , doctors}){
     
     
     return(
+    
+         <UserContainer>
+            <GlobalStyle/>
         <form onSubmit={(e)=>userSubmit(e)}>
             <label htmlFor="username">Username:</label>
             <input id="username" type="text" placeholder= "username" name="username" onChange={(e)=>userInput(e)} />
             <label htmlFor="password">Password:</label>
             <input id="password" type="text" placeholder="password" name="password" onChange={(e)=>userInput(e)}/>
-            <button type="submit" >Submit</button>
+            <Button>
+            <button type="signin" >Sign in</button>
+            </Button>
         </form>
-    
+        </UserContainer>
+        
   )
 }
        
@@ -48,3 +56,29 @@ function UserLogIn({currentUser , doctors}){
 
 export default UserLogIn
 
+const UserContainer = styled.div `
+    font-family:"Roboto", sans-serif;
+    width: 250px;
+    margin: 10px;
+    padding: 35px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .3), 0 0 20px rgba(0, 0, 0, 0.1);
+    border: 3px solid #96DED1;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    margin: 0px auto;
+    justify-content: center
+   
+   ` 
+const Button = styled.button`
+    display: inline-block;
+    border-radius: 3px;
+    padding: 0.5rem 0;
+    margin: 0.5rem .5rem;
+    width: 15rem;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+
+`

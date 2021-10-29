@@ -1,5 +1,8 @@
 import React from 'react';
+import '../App.css';
 import UpdateRecord from './UpdateRecord';
+import ButtonStyled from './styles/ButtonStyled';
+
 
 function DetailedMedRec({record , editRecord, deleteRecord}) {
 
@@ -15,7 +18,7 @@ function doDelete(){
         <h3> Lab Results: </h3>
         <img src =  {record.lab_results} style ={{width : "450px"}}/>
         <br/>
-        <button onClick={doDelete}>Delete Record</button>
+        <ButtonStyled onClick={doDelete}>Delete Record</ButtonStyled>
         <UpdateRecord record={record} editRecord={editRecord}/>
         </div>
 
@@ -23,3 +26,4 @@ function doDelete(){
 }
 
 export default DetailedMedRec;
+
